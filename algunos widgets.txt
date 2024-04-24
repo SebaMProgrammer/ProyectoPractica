@@ -1,0 +1,9 @@
+Place: ubicar posicion de elementos con x e y respecto del elemento padre
+
+self.button.place(x=60, y=40, width=0,5, height0,5)
+
+*valores absolutos, no cambian
+
+button.place(relx=0.1, , rely=0.1, relwidth=0.5, relheight0.5)
+*valores relativos al padre (contenedor)
+0.5 = 50%

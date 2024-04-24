@@ -1,0 +1,3 @@
+python ventana1.py
+esta es la forma usual de abrirlo, pero cambiando el tipo de archivo a .pyw
+este se puede abrir simplemente haciendo doble click

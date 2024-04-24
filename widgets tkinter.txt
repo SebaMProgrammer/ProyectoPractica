@@ -1,0 +1,29 @@
+3 Formas de configurar widgets tkinter
+fg= color de texto
+bg= color de fondo
+
+Constructor:
+miBoton = Button(Self,fg="red",bg="Blue")
+
+btn= Button(ventana, text="Presionar", fg="red", bg="yellow", command = miFuncion)
+btn.pack()
+---------------------------------
+Metodo config:
+miBoton.config(fg="red",bg="blue")
+
+
+btn= Button(ventana, text="Presionar", command = miFuncion)
+btn.config(fg="red", bg="blue")
+btn.pack()
+-----------------------------------
+
+
+Accesando a la propiedad (como un diccionario clave/valor)
+miBoton["fg"]="red"
+miBoton["bg"]="blue"
+
+
+btn= Button(ventana, text="Presionar", command = miFuncion)
+#btn.config(fg="red", bg="blue")
+btn["fg"]="red"
+btn["bg"]="yellow"
