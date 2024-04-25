@@ -1,14 +1,24 @@
 from tkinter import *
 from tkinter import ttk
 
+from countries import *
+
 class Ventana (Frame):
+
+    paises = Countries()
 
     def __init__(self, master=None):
         super().__init__(master,width=680, height=260)
         self.master = master
         self.pack()
         self.create_widgets()
+        self.llenaDatos()
     
+    def llenaDatos(self):
+        datos=self.paises.consulta_paises()
+        for row in datos:
+            self.grid.insert("",END, text=row[0], values=(row[1],row[2],row[3],row[4]))
+
     def fNuevo(self):
         pass
 
@@ -82,6 +92,4 @@ class Ventana (Frame):
         self.grid.heading("col4",text="Currency Code", anchor=CENTER)
 
         self.grid.place(x=247,y=0,width=420,height=259)
-
-        self.grid.insert("",END, text="1", values= ("ARG","Argentina","Buenos Aires","ARS"))
         
