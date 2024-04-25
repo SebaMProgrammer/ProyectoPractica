@@ -1,13 +1,13 @@
-import mysql.connector
+import tkinter as tk
 
-cnn = mysql.connector.connect(host="localhost", user="root",
-passwd="Ryusei-Go4",database="empleados")
+def mostrar_mensaje():
+    mensaje = tk.Label(root, text="¡Bienvenido!", font=("Arial", 14))
+    mensaje.pack(pady=20)
 
-cur = cnn.cursor()
-cur.execute("SELECT * FROM empleados")
-datos = cur.fetchall()
+root = tk.Tk()
+root.title("Página 2")
 
-for fila in datos:
-    print(fila)
+boton = tk.Button(root, text="Mostrar Mensaje", command=mostrar_mensaje)
+boton.pack(pady=10)
 
-print(cnn)
+root.mainloop()

@@ -5,7 +5,7 @@ passwd="Ryusei-Go4",database="world")
 
 cur = cnn.cursor()
 cur.execute("SELECT * FROM city WHERE CountryCode = 'AFG' s")
-DATOS = cur.fetchall()
+datos = cur.fetchall()
 
 for fila in datos:
     print(fila)
