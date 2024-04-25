@@ -1,13 +1,11 @@
-import mysql.connector
+from tkinter import *
+from ventana import *
 
-cnn = mysql.connector.connect(host="localhost", user="root",
-passwd="Ryusei-Go4",database="empleados")
+def main():
+    root = Tk()
+    root.wm_title("Crud Python MySQL")
+    app = Ventana(root)
+    app.mainloop()
 
-cur = cnn.cursor()
-cur.execute("SELECT * FROM empleados")
-datos = cur.fetchall()
-
-for fila in datos:
-    print(fila)
-
-print(cnn)
+if __name__ == "__main__":
+    main()
