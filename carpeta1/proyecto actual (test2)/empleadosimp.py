@@ -30,7 +30,7 @@ class Empleados:
     
     def inserta_empleado(self,nombre_completo, rut, rol):
         cur = self.cnn.cursor()
-        sql='''INSERT INTO empleados (nombre_completo, rut, rol) 
+        sql='''INSERT INTO countries (nombre_completo, rut, rol) 
         VALUES('{}', '{}', '{}')'''.format(nombre_completo, rut, rol)
         cur.execute(sql)
         n=cur.rowcount
@@ -38,19 +38,19 @@ class Empleados:
         cur.close()
         return n    
 
-    def elimina_empleados(self,Id):
+    def elimina_pais(self,Id):
         cur = self.cnn.cursor()
-        sql='''DELETE FROM empleados WHERE Id = {}'''.format(Id)
+        sql='''DELETE FROM countries WHERE Id = {}'''.format(Id)
         cur.execute(sql)
         n=cur.rowcount
         self.cnn.commit()    
         cur.close()
         return n   
 
-    def modifica_empleados(self,Id, nombre_completo, Rut, Rol):
+    def modifica_pais(self,Id, ISO3, CountryName, Capital, CurrencyCode):
         cur = self.cnn.cursor()
-        sql='''UPDATE empleados SET Nombre_completo='{}', Rut='{}', Rol='{}' 
-        WHERE Id={}'''.format(nombre_completo, Rut, Rol,Id)
+        sql='''UPDATE countries SET ISO3='{}', CountryName='{}', Capital='{}',
+        CurrencyCode='{}' WHERE Id={}'''.format(ISO3, CountryName, Capital, CurrencyCode,Id)
         cur.execute(sql)
         n=cur.rowcount
         self.cnn.commit()    
