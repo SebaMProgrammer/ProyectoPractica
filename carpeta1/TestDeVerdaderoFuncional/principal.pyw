@@ -24,7 +24,12 @@ class MasterWindow(tk.Tk):
         mostrar_ventana_empleados()
 
     def load_page(self, page_name):
-        pass
+        try:
+            module = importlib.import_module(page_name)
+            page_class = getattr(module, "Page")
+            self.show_page(page_class(self))
+        except ImportError as e:
+            print(f"No se pudo cargar la página {page_name}: {e}")
 
     def show_page(self, page):
         for widget in self.winfo_children():
