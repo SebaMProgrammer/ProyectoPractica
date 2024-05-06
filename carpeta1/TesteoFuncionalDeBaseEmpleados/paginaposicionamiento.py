@@ -1,13 +1,21 @@
+# paginaposicionamiento.py
+
 import tkinter as tk
 
-def mostrar_mensaje():
-    mensaje = tk.Label(root, text="¡Bienvenido!", font=("Arial", 14))
-    mensaje.pack(pady=20)
+class PaginaPosicionamientos(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Página de Posicionamientos")
+        self.geometry("400x300")
 
-root = tk.Tk()
-root.title("Página 2")
+        self.label = tk.Label(self, text="Página de Posicionamientos", font=("Arial", 14))
+        self.label.pack(pady=20)
 
-boton = tk.Button(root, text="Mostrar Mensaje", command=mostrar_mensaje)
-boton.pack(pady=10)
+        # Aquí puedes agregar widgets y funcionalidad relacionada con la página de posicionamientos
 
-root.mainloop()
+def mostrar_pagina_posicionamiento():
+    app = PaginaPosicionamientos()
+    app.mainloop()
+
+if __name__ == "__main__":
+    mostrar_pagina_posicionamiento()
