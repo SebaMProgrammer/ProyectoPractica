@@ -8,9 +8,9 @@ class Ventana (Frame):
     empleados = Empleados()
 
     def __init__(self, master=None):
-        super().__init__(master,width=800, height=260)
+        super().__init__(master,width=1000, height=500)
         self.master = master
-        self.pack()
+        self.pack(fill=BOTH, expand=True)
         self.create_widgets()
         self.llenaDatos()
     
@@ -80,7 +80,7 @@ class Ventana (Frame):
         self.grid =ttk.Treeview(self, columns=("col1","col2","col3","col4"))
 
         self.grid.column("#0",width=50)
-        self.grid.column("col1",width=60, anchor=CENTER)
+        self.grid.column("col1",width=200, anchor=CENTER)
         self.grid.column("col2",width=120, anchor=CENTER)
         self.grid.column("col3",width=90, anchor=CENTER)
         self.grid.column("col4",width=90, anchor=CENTER)
