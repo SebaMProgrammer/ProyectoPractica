@@ -8,14 +8,14 @@ class Ventana (Frame):
     empleados = Empleados()
 
     def __init__(self, master=None):
-        super().__init__(master,width=680, height=260)
+        super().__init__(master,width=800, height=260)
         self.master = master
         self.pack()
         self.create_widgets()
         self.llenaDatos()
     
     def llenaDatos(self):
-        datos=self.paises.consulta_paises()
+        datos=self.empleados.consulta_empleados()
         for row in datos:
             self.grid.insert("",END, text=row[0], values=(row[1],row[2],row[3],row[4]))
 
@@ -50,25 +50,25 @@ class Ventana (Frame):
         frame2 = Frame(self, bg="#d3dde3")
         frame2.place(x=95, y=0, width=150, height=259)
 
-        lbl1 = Label(frame2, text= "ISO3: ")
+        lbl1 = Label(frame2, text= "Nombre_completo: ")
         lbl1.place(x=3,y=5)
         self.txtISO3=Entry(frame2)
         self.txtISO3.place(x=3,y=25,width=50, height=20)  
 
-        lbl2 = Label(frame2, text= "Country Name: ")
+        lbl2 = Label(frame2, text= "Rut: ")
         lbl2.place(x=3,y=55)
         self.txtISO3=Entry(frame2)
         self.txtISO3.place(x=3,y=75,width=100, height=20)  
 
-        lbl3 = Label(frame2, text= "Country Name: ")
+        lbl3 = Label(frame2, text= "Rol: ")
         lbl3.place(x=3,y=105)
         self.txtISO3=Entry(frame2)
-        self.txtISO3.place(x=3,y=125,width=100, height=20)  
+        self.txtISO3.place(x=3,y=125,width=100, height=20)
 
-        lbl4 = Label(frame2, text= "Country Name: ")
+        lbl4 = Label(frame2, text= "Activo: ")
         lbl4.place(x=3,y=155)
         self.txtISO3=Entry(frame2)
-        self.txtISO3.place(x=3,y=175,width=50, height=20)  
+        self.txtISO3.place(x=3,y=175,width=100, height=20)    
 
         self.btnGuardar=Button(frame2,text="Guardar", command=self.fGuardar, bg="green", fg="white")
         self.btnGuardar.place(x=10,y=210,width=60, height=30)
@@ -80,16 +80,18 @@ class Ventana (Frame):
 
         self.grid.column("#0",width=50)
         self.grid.column("col1",width=60, anchor=CENTER)
-        self.grid.column("col2",width=90, anchor=CENTER)
+        self.grid.column("col2",width=120, anchor=CENTER)
         self.grid.column("col3",width=90, anchor=CENTER)
         self.grid.column("col4",width=90, anchor=CENTER)
 
 
+
         self.grid.heading("#0",text="id")
-        self.grid.heading("col1",text="ISO3", anchor=CENTER)
-        self.grid.heading("col2",text="Country Name", anchor=CENTER)
-        self.grid.heading("col3",text="Capital", anchor=CENTER)
-        self.grid.heading("col4",text="Currency Code", anchor=CENTER)
+        self.grid.heading("col1",text="Nombre_completo", anchor=CENTER)
+        self.grid.heading("col2",text="Rut", anchor=CENTER)
+        self.grid.heading("col3",text="Rol", anchor=CENTER)
+        self.grid.heading("col3",text="Rol", anchor=CENTER)
+    
 
         self.grid.place(x=247,y=0,width=420,height=259)
         
