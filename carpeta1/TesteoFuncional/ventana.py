@@ -15,9 +15,10 @@ class Ventana (Frame):
         self.llenaDatos()
     
     def llenaDatos(self):
-        datos=self.empleados.consulta_empleados()
+        datos = self.empleados.consulta_empleados()
         for row in datos:
-            self.grid.insert("",END, text=row[0], values=(row[1],row[2],row[3],row[4]))
+            activo = "NO" if row[4] == 0 else "SI"  # Cambia 0 a "NO" y 1 a "SI"
+            self.grid.insert("", END, text=row[0], values=(row[1], row[2], row[3], activo))
 
     def fNuevo(self):
         pass
