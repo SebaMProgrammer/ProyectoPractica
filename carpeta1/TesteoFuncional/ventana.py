@@ -19,9 +19,38 @@ class Ventana (Frame):
         for row in datos:
             activo = "NO" if row[4] == 0 else "SI"  # Cambia 0 a "NO" y 1 a "SI"
             self.grid.insert("", END, text=row[0], values=(row[1], row[2], row[3], activo))
+    
+    def habilitarCajas(self,estado):
+        self.txtNombre.configure(state=estado)
+        self.txtRut.configure(state=estado)
+        self.txtRol.configure(state=estado)
+        self.txtActivo.configure(state=estado)
+    
+    def habilitarBtnOper (self,estado):
+        self.btnNuevo.configure(state=estado)
+        self.btnModificar.configure(state=estado)
+        self.btnEliminar.configure(state=estado)
+
+    def habilitarBtnGuardar (self,estado):
+        self.btnGuardar.configure(state=estado)
+        self.btnCancelar.configure(state=estado)
+
+    def limpiarCajas(self):
+        self.txtNombre.delete(0,END)
+        self.txtRut.delete(0,END)
+        self.txtRol.delete(0,END)
+        self.txtActivo.delete(0,END)
+
+    def limpiarGrid(self):
+        for item in self.grid.get_children():
+            self.grid.delete(item)
 
     def fNuevo(self):
-        pass
+        self.habilitarCajas("normal")
+        self.habilitarBtnOper("disabled")
+        self.habilitarBtnGuardar("normal")
+        self.limpiarCajas()
+        self.txtNombre.focus()
 
     def fModificar(self):
         pass
@@ -30,7 +59,12 @@ class Ventana (Frame):
         pass
 
     def fGuardar(self):
-        pass
+        self.empleados.inserta_empleado(self.txtNombre.get(), self.txtRut.get(), self.txtRol.get(), self.txtActivo.get())
+        self.limpiarGrid()
+        self.llenaDatos()
+        self.habilitarBtnGuardar("disabled")
+        self.habilitarBtnOper("normal")
+
 
     def fCancelar(self):
         pass
@@ -42,34 +76,34 @@ class Ventana (Frame):
         self.btnNuevo=Button(frame1, text="Nuevo", command=self.fNuevo, bg="blue", fg="white")
         self.btnNuevo.place(x=5,y=50,width=80, height=30)
 
-        self.btnNuevo=Button(frame1, text="Modificar", command=self.fModificar, bg="blue", fg="white")
-        self.btnNuevo.place(x=5,y=90,width=80, height=30)
+        self.btnModificar=Button(frame1, text="Modificar", command=self.fModificar, bg="blue", fg="white")
+        self.btnModificar.place(x=5,y=90,width=80, height=30)
 
-        self.btnNuevo=Button(frame1, text="Eliminar", command=self.fEliminar, bg="blue", fg="white")
-        self.btnNuevo.place(x=5,y=130,width=80, height=30)
+        self.btnEliminar=Button(frame1, text="Eliminar", command=self.fEliminar, bg="blue", fg="white")
+        self.btnEliminar.place(x=5,y=130,width=80, height=30)
     
         frame2 = Frame(self, bg="#d3dde3")
         frame2.place(x=95, y=0, width=150, height=259)
 
         lbl1 = Label(frame2, text= "Nombre_completo: ")
         lbl1.place(x=3,y=5)
-        self.txtISO3=Entry(frame2)
-        self.txtISO3.place(x=3,y=25,width=50, height=20)  
+        self.txtNombre=Entry(frame2)
+        self.txtNombre.place(x=3,y=25,width=50, height=20)  
 
         lbl2 = Label(frame2, text= "Rut: ")
         lbl2.place(x=3,y=55)
-        self.txtISO3=Entry(frame2)
-        self.txtISO3.place(x=3,y=75,width=100, height=20)  
+        self.txtRut=Entry(frame2)
+        self.txtRut.place(x=3,y=75,width=100, height=20)  
 
         lbl3 = Label(frame2, text= "Rol: ")
         lbl3.place(x=3,y=105)
-        self.txtISO3=Entry(frame2)
-        self.txtISO3.place(x=3,y=125,width=100, height=20)
+        self.txtRol=Entry(frame2)
+        self.txtRol.place(x=3,y=125,width=100, height=20)
 
         lbl4 = Label(frame2, text= "Activo: ")
         lbl4.place(x=3,y=155)
-        self.txtISO3=Entry(frame2)
-        self.txtISO3.place(x=3,y=175,width=100, height=20)    
+        self.txtActivo=Entry(frame2)
+        self.txtActivo.place(x=3,y=175,width=100, height=20)    
 
         self.btnGuardar=Button(frame2,text="Guardar", command=self.fGuardar, bg="green", fg="white")
         self.btnGuardar.place(x=10,y=210,width=60, height=30)

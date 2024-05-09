@@ -31,7 +31,7 @@ class Empleados:
     def inserta_empleado(self,nombre_completo, rut, rol, activo):
         cur = self.cnn.cursor()
         sql='''INSERT INTO empleados (nombre_completo, rut, rol, activo) 
-        VALUES('{}', '{}', '{}')'''.format(nombre_completo, rut, rol, activo)
+        VALUES('{}', '{}','{}','{}')'''.format(nombre_completo, rut, rol, activo)
         cur.execute(sql)
         n=cur.rowcount
         self.cnn.commit()    
@@ -49,7 +49,7 @@ class Empleados:
 
     def modifica_empleados(self,Id, nombre_completo, Rut, Rol):
         cur = self.cnn.cursor()
-        sql='''UPDATE empleados SET Nombre_completo='{}', Rut='{}', Rol='{}' 
+        sql='''UPDATE empleados SET Nombre_completo='{}', Rut='{}', Rol='{}', Activo='{}' 
         WHERE Id={}'''.format(nombre_completo, Rut, Rol,Id)
         cur.execute(sql)
         n=cur.rowcount
