@@ -87,12 +87,11 @@ class Ventana (Frame):
 
 
 
-        self.grid.heading("#0",text="id")
-        self.grid.heading("col1",text="Nombre_completo", anchor=CENTER)
+        self.grid.heading("#0",text="Id")
+        self.grid.heading("col1",text="Nombre Completo", anchor=CENTER)
         self.grid.heading("col2",text="Rut", anchor=CENTER)
         self.grid.heading("col3",text="Rol", anchor=CENTER)
-        self.grid.heading("col3",text="Rol", anchor=CENTER)
+        self.grid.heading("col4",text="Activo", anchor=CENTER)
     
 
-        self.grid.place(x=247,y=0,width=420,height=259)
-        
+        self.grid.place(x=247,y=0,width=900,height=259)

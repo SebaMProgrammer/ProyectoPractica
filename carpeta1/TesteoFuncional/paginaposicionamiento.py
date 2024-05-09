@@ -6,7 +6,7 @@ class PaginaPosicionamientos(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Página de Posicionamientos")
-        self.geometry("400x300")
+        self.geometry("1200x600")
 
         self.label = tk.Label(self, text="Página de Posicionamientos", font=("Arial", 14))
         self.label.pack(pady=20)
