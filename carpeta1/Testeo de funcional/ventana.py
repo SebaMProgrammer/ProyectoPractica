@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-
 from empleadosimp import *
+from tkinter import messagebox
 
 class Ventana (Frame):
 
@@ -13,6 +13,9 @@ class Ventana (Frame):
         self.pack(fill=BOTH, expand=True)
         self.create_widgets()
         self.llenaDatos()
+        self.habilitarCajas("disabled")
+        self.habilitarBtnOper("normal")
+        self.habilitarBtnGuardar("disabled")
     
     def llenaDatos(self):
         datos = self.empleados.consulta_empleados()
@@ -51,20 +54,62 @@ class Ventana (Frame):
         self.habilitarBtnGuardar("normal")
         self.limpiarCajas()
         self.txtNombre.focus()
+        self.id=-1  #para el arreglo de la id ante eliminaciones y demas
 
     def fModificar(self):
+        selected = self.grid.focus()
+        clave = self.grid.item(selected,'text')
+        if clave == '':
+            messagebox.showwarning("Modificar", 'Debes seleccionar un elemento')
+        else:
+            self.id= clave
+            self.habilitarCajas("normal")
+            valores = self.grid.item(selected,'values')
+            self.txtNombre.insert(0,valores[0])
+            self.txtRut.insert(0,valores[1])
+            self.txtRol.insert(0,valores[2])
+            self.txtActivo.insert(0,valores[3])
+
+            self.habilitarBtnOper("disabled")
+            self.habilitarBtnGuardar("normal")
+            self.txtNombre.focus()
         pass
 
+
+
     def fEliminar(self):
+        selected = self.grid.focus()
+        clave = self.grid.item(selected,'text')
+
+        if clave == '':
+            messagebox.showwarning("Eliminar", 'Debes seleccionar un elemento')
+        else:
+            valores = self.grid.item(selected,'values')
+            data= str(clave) + ", " + valores[0] + ", " + valores[1]
+            r = messagebox.askquestion("Eliminar", "¿Deseas eliminar el registro seleccionado?\n" + data )
+            
+            if r == messagebox.YES:
+                n = self.empleados.elimina_empleados(clave)
+                if n == 1:
+                    messagebox.showinfo("Eliminar", 'Elemento eliminado correctamente.')
+                    self.limpiarGrid()
+                    self.llenaDatos()
+                else:
+                    messagebox.showwarning("Eliminar", 'No fue posible eliminar el elemento')
         pass
 
     def fGuardar(self):
-        self.empleados.inserta_empleado(self.txtNombre.get(), self.txtRut.get(), self.txtRol.get(), self.txtActivo.get())
+        if self.id ==-1:
+            self.empleados.inserta_empleado(self.txtNombre.get(), self.txtRut.get(), self.txtRol.get(), self.txtActivo.get())
+        else:
+            self.empleados.modifica_empleados(self.id, self.txtNombre.get(), self.txtRut.get(), self.txtRol.get(), self.txtActivo.get())
+            self.id= -1
         self.limpiarGrid()
         self.llenaDatos()
+        self.limpiarCajas
         self.habilitarBtnGuardar("disabled")
         self.habilitarBtnOper("normal")
-
+        self.habilitarCajas("disabled")
 
     def fCancelar(self):
         pass
@@ -109,13 +154,15 @@ class Ventana (Frame):
         self.btnGuardar.place(x=10,y=210,width=60, height=30)
         self.btnCancelar=Button(frame2,text="Cancelar", command=self.fCancelar, bg="red", fg="white")
         self.btnCancelar.place(x=80,y=210,width=60, height=30)        
+        
+        frame3 = Frame(self, bg="yellow")
+        frame3.place(x=247,y=0,width=525,height=259)
 
+        self.grid =ttk.Treeview(frame3, columns=("col1","col2","col3","col4"))
 
-        self.grid =ttk.Treeview(self, columns=("col1","col2","col3","col4"))
-
-        self.grid.column("#0",width=50)
-        self.grid.column("col1",width=200, anchor=CENTER)
-        self.grid.column("col2",width=120, anchor=CENTER)
+        self.grid.column("#0",width=60)
+        self.grid.column("col1",width=180, anchor=CENTER)
+        self.grid.column("col2",width=90, anchor=CENTER)
         self.grid.column("col3",width=90, anchor=CENTER)
         self.grid.column("col4",width=90, anchor=CENTER)
 
@@ -128,4 +175,10 @@ class Ventana (Frame):
         self.grid.heading("col4",text="Activo", anchor=CENTER)
     
 
-        self.grid.place(x=247,y=0,width=900,height=259)
+        self.grid.pack(side=LEFT, fill = Y)
+
+        sb = Scrollbar(frame3, orient=VERTICAL)
+        sb.pack(side=RIGHT, fill = Y)
+        self.grid.config(yscrollcommand=sb.set)
+        sb.config(command=self.grid.yview)
+        self.grid['selectmode']='browse'
