@@ -70,9 +70,10 @@ class Ventana (Frame):
             self.txtNombre.insert(0, valores[0])
             self.txtRut.insert(0, valores[1])
             self.txtRol.insert(0, valores[2])
+            # Corregir cómo se obtiene y muestra el valor de "Activo"
+            activo = "SI" if valores[3] == "SI" else "NO"  # Obtener el valor correcto de "Activo"
             self.txtActivo.delete(0, END)
-            self.txtActivo.insert(0, "SI" if valores[3] == "SI" else "NO")
-
+            self.txtActivo.insert(0, activo)
             self.habilitarBtnOper("disabled")
             self.habilitarBtnGuardar("normal")
             self.txtNombre.focus()
@@ -111,7 +112,7 @@ class Ventana (Frame):
             self.id= -1
         self.limpiarGrid()
         self.llenaDatos()
-        self.limpiarCajas
+        self.limpiarCajas()
         self.habilitarBtnGuardar("disabled")
         self.habilitarBtnOper("normal")
         self.habilitarCajas("disabled")

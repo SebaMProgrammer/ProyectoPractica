@@ -47,12 +47,13 @@ class Empleados:
         cur.close()
         return n   
 
-    def modifica_empleados(self,Id, nombre_completo, Rut, Rol, Activo):
+    def modifica_empleados(self, Id, nombre_completo, Rut, Rol, Activo):
         cur = self.cnn.cursor()
-        sql='''UPDATE empleados SET Nombre_completo='{}', Rut='{}', Rol='{}', Activo='{}' 
-        WHERE Id={}'''.format(nombre_completo, Rut, Rol,Id, Activo)
+        sql = '''UPDATE empleados SET Nombre_completo='{}', Rut='{}', Rol='{}', Activo='{}' 
+                WHERE Id={}'''.format(nombre_completo, Rut, Rol, Activo, Id)  # Agregado {} para Activo
         cur.execute(sql)
-        n=cur.rowcount
-        self.cnn.commit()    
+        n = cur.rowcount
+        self.cnn.commit()
         cur.close()
-        return n   
+        return n
+
