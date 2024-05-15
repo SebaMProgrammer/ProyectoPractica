@@ -23,6 +23,9 @@ class Ventana (Frame):
             print("Valor de Activo en la base de datos:", row[4])
             activo = "NO" if row[4] == 0 else "SI"  # Cambia 0 a "NO" y 1 a "SI"
             self.grid.insert("", END, text=row[0], values=(row[1], row[2], row[3], activo))
+        
+        if len(self.grid.get_children()) > 0:
+            self.grid.selection_set(self.grid.get_children()[0])
 
     
     def habilitarCajas(self,estado):
@@ -91,7 +94,6 @@ class Ventana (Frame):
             valores = self.grid.item(selected,'values')
             data= str(clave) + ", " + valores[0] + ", " + valores[1]
             r = messagebox.askquestion("Eliminar", "¿Deseas eliminar el registro seleccionado?\n" + data )
-            
             if r == messagebox.YES:
                 n = self.empleados.elimina_empleados(clave)
                 if n == 1:
@@ -106,9 +108,11 @@ class Ventana (Frame):
         if self.id ==-1:
             activo = "1" if self.txtActivo.get().upper() == "SI" else "0"  # Convertir "SI" a 1 y "NO" a 0
             self.empleados.inserta_empleado(self.txtNombre.get(), self.txtRut.get(), self.txtRol.get(), activo)
+            messagebox.showinfo("Insertarr", 'Elemento insertado correctamente.')
         else:
             activo = "1" if self.txtActivo.get().upper() == "SI" else "0"  # Convertir "SI" a 1 y "NO" a 0
             self.empleados.modifica_empleados(self.id, self.txtNombre.get(), self.txtRut.get(), self.txtRol.get(), activo)
+            messagebox.showinfo("Insertarr", 'Elemento insertado correctamente.')
             self.id= -1
         self.limpiarGrid()
         self.llenaDatos()
@@ -118,7 +122,11 @@ class Ventana (Frame):
         self.habilitarCajas("disabled")
 
     def fCancelar(self):
-        pass
+        r = messagebox.askquestion("Cancelar", "¿Esta seguro que desea cancelar la operación actual?")
+        if r == messagebox.YES:
+            self.habilitarBtnGuardar("disabled")
+            self.habilitarBtnOper("normal")
+            self.habilitarCajas("disabled")
 
     def create_widgets(self):
         frame1 = Frame(self, bg ="#bfdaff")
@@ -139,7 +147,7 @@ class Ventana (Frame):
         lbl1 = Label(frame2, text= "Nombre_completo: ")
         lbl1.place(x=3,y=5)
         self.txtNombre=Entry(frame2)
-        self.txtNombre.place(x=3,y=25,width=50, height=20)  
+        self.txtNombre.place(x=3,y=25,width=100, height=20)  
 
         lbl2 = Label(frame2, text= "Rut: ")
         lbl2.place(x=3,y=55)
