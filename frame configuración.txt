@@ -1,7 +1,0 @@
-w = frame (master, option,...)
-
-w.config(bg="blue")         #color de fondo
-w.config(cursor="pirate")   #tipo de cursor (arrow por defecto)
-w.config(relief="sunken")   #relieve del frame
-w.config(bd=25)             #tamaño del borde en pixeles
-

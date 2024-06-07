@@ -1,7 +1,0 @@
-consiste en dividir conceptualmente la ventana principal en filas (rows)
- y columnas (columns), formando celdas en donde se pueden ubicar los elementos
-
- columnspan, rowspan: indica cuantas columnas o filas debe ocupar el control (por defecto 1)
-
- rowconfigure, columnconfigure: con el parametro weight=1, indicamos que la filas
- o columna se expande o contrae si la ventana cambia de tamaño
